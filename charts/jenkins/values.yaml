@@ -438,9 +438,10 @@ controller:
   updateStrategy: {}
 
   ingress:
-    enabled: false
+    enabled: true
     # Override for the default paths that map requests to the backend
-    paths: []
+    path: "/"
+    # configures the hostname e.g. jenkins.example.com
     # - backend:
     #     serviceName: ssl-redirect
     #     servicePort: use-annotation
@@ -453,8 +454,8 @@ controller:
     # For Kubernetes v1.19+, use 'networking.k8s.io/v1'
     apiVersion: "extensions/v1beta1"
     labels: {}
-    annotations: {}
-    # kubernetes.io/ingress.class: nginx
+    annotations:
+      kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
@@ -462,7 +463,9 @@ controller:
     # Set this path to jenkinsUriPrefix above or use annotations to rewrite path
     # path: "/jenkins"
     # configures the hostname e.g. jenkins.example.com
+    #hostName:
     hostName:
+      - jenkins.sdp-dev.p4avd.fcagroup.com
     tls:
     # - secretName: jenkins.cluster.local
     #   hosts:
